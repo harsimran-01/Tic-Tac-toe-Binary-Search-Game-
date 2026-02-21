@@ -37,8 +37,6 @@ This project focuses on making **algorithms visual, intuitive, and fun**.
 
 ---
 
----
-
 ## 🚀 Features
 
 <div align="center">
