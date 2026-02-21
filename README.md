@@ -37,13 +37,6 @@ This project focuses on making **algorithms visual, intuitive, and fun**.
 
 ---
 
-## 🎥 Preview
-
-<p align="center">
-  <!-- Replace with your GIF later -->
-  <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExb2R0a2k0b2p3ZzR3b3p0b3k2eGxkbnR5Z3Q0bXl5eHF6dWc5eCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3o7TKMt1VVNkHV2PaE/giphy.gif" width="700"/>
-</p>
-
 ---
 
 ## 🚀 Features
