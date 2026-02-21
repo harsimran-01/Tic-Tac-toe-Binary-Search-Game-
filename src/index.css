@@ -1,0 +1,200 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 20% 96%;
+    --foreground: 220 25% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 25% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 25% 12%;
+    --primary: 250 85% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 15% 92%;
+    --secondary-foreground: 220 25% 12%;
+    --muted: 220 15% 92%;
+    --muted-foreground: 220 10% 45%;
+    --accent: 280 70% 55%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 63% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 250 85% 60%;
+    --radius: 0.75rem;
+
+    /* Game-specific tokens */
+    --game-x: 200 90% 45%;
+    --game-o: 340 80% 52%;
+    --game-board: 220 15% 92%;
+    --game-square: 0 0% 100%;
+    --game-square-hover: 220 15% 96%;
+    --glass-bg: 0 0% 100% / 0.7;
+    --glass-border: 220 15% 85% / 0.6;
+    --glow-primary: 250 85% 60% / 0.2;
+    --glow-x: 200 90% 45% / 0.25;
+    --glow-o: 340 80% 52% / 0.25;
+  }
+
+  .dark {
+    --background: 220 25% 10%;
+    --foreground: 210 40% 96%;
+    --card: 220 25% 14%;
+    --card-foreground: 210 40% 96%;
+    --popover: 220 25% 14%;
+    --popover-foreground: 210 40% 96%;
+    --primary: 250 85% 65%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 220 20% 20%;
+    --secondary-foreground: 210 40% 96%;
+    --muted: 220 20% 18%;
+    --muted-foreground: 215 20% 55%;
+    --accent: 280 70% 60%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 63% 58%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 220 20% 22%;
+    --input: 220 20% 22%;
+    --ring: 250 85% 65%;
+
+    --game-x: 200 90% 55%;
+    --game-o: 340 80% 60%;
+    --game-board: 220 25% 16%;
+    --game-square: 220 25% 20%;
+    --game-square-hover: 220 25% 25%;
+    --glass-bg: 220 25% 14% / 0.6;
+    --glass-border: 220 20% 30% / 0.4;
+    --glow-primary: 250 85% 65% / 0.3;
+    --glow-x: 200 90% 55% / 0.4;
+    --glow-o: 340 80% 60% / 0.4;
+  }
+}
+
+@layer components {
+  .glassmorphic {
+    @apply bg-card/60 backdrop-blur-xl border border-border/40 shadow-xl;
+  }
+
+  .glassmorphic-strong {
+    @apply bg-card/80 backdrop-blur-2xl border border-border/50 shadow-2xl;
+  }
+
+  .game-board {
+    @apply grid grid-cols-3 gap-3 w-full h-full p-3;
+  }
+
+  .square {
+    @apply aspect-square flex items-center justify-center rounded-xl 
+           border border-border/30 bg-[hsl(var(--game-square))] 
+           transition-all duration-300 ease-out cursor-pointer
+           hover:bg-[hsl(var(--game-square-hover))] hover:border-border/50
+           hover:shadow-lg hover:scale-[1.02]
+           active:scale-[0.97];
+  }
+
+  .square-active {
+    @apply cursor-default hover:scale-100;
+  }
+
+  .square-content {
+    @apply h-full w-full flex items-center justify-center rounded-xl transition-all duration-300;
+  }
+
+  .x-mark {
+    @apply text-[hsl(var(--game-x))] text-5xl font-black tracking-tight;
+    text-shadow: 0 0 20px hsl(var(--glow-x)), 0 0 40px hsl(var(--glow-x));
+  }
+
+  .o-mark {
+    @apply text-[hsl(var(--game-o))] text-5xl font-black tracking-tight;
+    text-shadow: 0 0 20px hsl(var(--glow-o)), 0 0 40px hsl(var(--glow-o));
+  }
+
+  .winning-square-content {
+    @apply border-primary/60 border-2 shadow-[0_0_25px_hsl(var(--glow-primary))] 
+           bg-primary/10;
+  }
+
+  .winning-square-highlight {
+    @apply animate-pulse-soft;
+  }
+
+  .shadow-glow {
+    @apply shadow-[0_0_20px_hsl(var(--glow-primary))];
+  }
+
+  .game-title {
+    @apply text-4xl md:text-5xl font-black tracking-tight bg-gradient-to-r 
+           from-[hsl(var(--game-x))] via-primary to-[hsl(var(--game-o))] 
+           bg-clip-text text-transparent;
+  }
+
+  .game-subtitle {
+    @apply text-muted-foreground text-sm md:text-base mt-2;
+  }
+
+  .status-chip {
+    @apply px-3 py-1.5 rounded-full text-xs font-semibold 
+           bg-primary/15 text-primary border border-primary/20;
+  }
+
+  .score-card {
+    @apply flex flex-col items-center gap-1 px-6 py-3 rounded-xl 
+           glassmorphic transition-all duration-300;
+  }
+
+  .score-card-active {
+    @apply ring-2 ring-primary/50 shadow-[0_0_15px_hsl(var(--glow-primary))];
+  }
+}
+
+/* Custom Animation Keyframes */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scale-in {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.03); }
+}
+
+@keyframes winning-flash {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.4); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 10px hsl(var(--glow-primary)); }
+  50% { box-shadow: 0 0 30px hsl(var(--glow-primary)), 0 0 60px hsl(var(--glow-primary)); }
+}
+
+.animate-fade-in { animation: fade-in 0.4s ease-out forwards; }
+.animate-scale-in { animation: scale-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+.animate-pulse-soft { animation: pulse-soft 2s ease-in-out infinite; }
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-winning-flash { animation: winning-flash 1s ease-in-out infinite; }
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.1), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+.animate-glow-pulse { animation: glow-pulse 2s ease-in-out infinite; }
